@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MediChat - Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="auth.js"></script>
+    <script defer src="chat.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <h2>MediChat - AI Medical Assistant</h2>
+        <button id="logout-btn">Logout</button>
+    </nav>
+
+    <!-- Chat Section -->
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+            <div class="message bot-message">Welcome to MediChat! How can I assist you today?</div>
+        </div>
+        <div class="chat-input">
+            <input type="text" id="message-input" placeholder="Type your message..." />
+            <button id="send-btn">Send</button>
+        </div>
+    </div>
+
+    <!-- Document Upload Section -->
+    <div class="upload-container">
+        <h3>Upload a Medical Document</h3>
+        <input type="file" id="document-upload">
+        <button id="upload-btn">Upload</button>
+        <p id="upload-status"></p>
+    </div>
+</body>
+</html>
