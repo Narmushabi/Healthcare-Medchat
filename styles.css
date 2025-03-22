@@ -1,67 +1,140 @@
+/* 🎨 Global Styles */
+:root {
+  --primary-color: #3b82f6;
+  --primary-hover: #2563eb;
+  --background-color: #f9fafb;
+  --text-primary: #1f2937;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --error-color: #ef4444;
+  --success-color: #10b981;
+  --transition-speed: 0.3s;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  text-align: center;
+  font-family: 'Inter', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+  transition: background 0.3s ease;
 }
 
-nav {
-  display: flex;
-  justify-content: space-between;
-  padding: 15px;
-  background: #007bff;
-  color: white;
-}
-
-.chat-container {
-  width: 50%;
-  margin: 20px auto;
-  padding: 20px;
-  border: 1px solid #ddd;
-  background: #f9f9f9;
-  border-radius: 5px;
-}
-
-.chat-box {
-  max-height: 300px;
-  overflow-y: auto;
-  padding: 10px;
+/* 🎭 Login & Register Forms */
+.auth-container {
   background: white;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
 }
 
+/* ✨ Form Input Fields */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: 5px;
+  transition: all var(--transition-speed) ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+}
+
+/* 🎭 Form Buttons */
+button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+  transition: background var(--transition-speed);
+}
+
+button:hover {
+  background-color: var(--primary-hover);
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+/* 🚀 Chat Container */
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 90vh;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ✨ Chat Messages */
 .message {
   padding: 10px;
-  margin: 5px 0;
-  border-radius: 5px;
+  margin: 8px 0;
+  border-radius: 10px;
+  max-width: 80%;
+  word-wrap: break-word;
+  animation: fadeIn 0.3s ease-in-out;
 }
 
-.user-message {
-  background: #007bff;
+/* 👤 User Messages */
+.message.user {
+  background: var(--primary-color);
   color: white;
-  text-align: right;
+  align-self: flex-end;
 }
 
-.bot-message {
-  background: #f1f1f1;
-  color: black;
-  text-align: left;
+/* 🤖 Bot Messages */
+.message.bot {
+  background: var(--background-color);
+  color: var(--text-primary);
+  align-self: flex-start;
 }
 
-.chat-input {
+/* 🟢 Typing Indicator */
+.typing-indicator {
   display: flex;
-  margin-top: 10px;
+  align-items: center;
 }
 
-.chat-input input {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
+.typing-indicator span {
+  width: 8px;
+  height: 8px;
+  margin: 0 2px;
+  background-color: var(--text-secondary);
+  border-radius: 50%;
+  animation: typing 1.5s infinite ease-in-out;
 }
 
-.upload-container {
-  margin: 20px auto;
-  width: 50%;
-  padding: 20px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+.typing-indicator span:nth-child(2) {
+  animation-delay: 0.2s;
 }
+
+.typing-indicator span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+/* ✨ Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes typing {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-5px); }
+  100% { transform: translateY(0px); }
+}
+
+/* 📱 Mobile Responsive Design */
+@media (max-width: 768px) {
+  .chat-container {
+      height: 85vh;
+  }
+}
+

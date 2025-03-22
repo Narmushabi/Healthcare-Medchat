@@ -1,0 +1,8 @@
+flask
+flask_cors
+flask_limiter
+gunicorn
+langchain_community
+sqlite3
+dotenv
+werkzeug

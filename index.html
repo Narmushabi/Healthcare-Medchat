@@ -4,26 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MediChat - Login</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
-    <script src="js/auth.js" defer></script>
+    <script defer src="auth.js"></script>
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white shadow-lg rounded-lg p-6 max-w-md w-full">
-        <h2 class="text-2xl font-bold text-center mb-4">Login to MediChat</h2>
+<body>
+    <h2>Login to MediChat</h2>
+    <form id="login-form">
+        <input type="email" id="email" placeholder="Email" required>
+        <input type="password" id="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+    
+    <p>Don't have an account? <a href="register.html">Register Here</a></p>
 
-        <form id="login-form">
-            <div class="mb-4">
-                <label class="block text-gray-700">Email</label>
-                <input type="email" id="email" class="w-full p-2 border rounded" required>
-            </div>
-            <div class="mb-6">
-                <label class="block text-gray-700">Password</label>
-                <input type="password" id="password" class="w-full p-2 border rounded" required>
-            </div>
-            <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded">Login</button>
-            <p id="error-message" class="text-red-500 text-sm mt-2 hidden"></p>
-            <p class="mt-4 text-center text-sm">Don't have an account? <a href="register.html" class="text-blue-500">Sign up</a></p>
-        </form>
-    </div>
+    <div id="error-message" style="color: red;"></div>
 </body>
 </html>

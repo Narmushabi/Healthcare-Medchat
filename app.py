@@ -11,14 +11,30 @@ from langchain_community.llms import Together
 from langchain.chains import ConversationChain
 from langchain.memory import ConversationBufferMemory
 
-# Load environment variables (API keys, secrets)
+import os
 from dotenv import load_dotenv
-load_dotenv()
+
+# Load .env file
+dotenv_path = os.path.join(os.path.dirname(__file__), '.env')
+load_dotenv(dotenv_path)
+
+# Verify if environment variables are loaded
+print("FLASK_SECRET_KEY:", os.getenv("FLASK_SECRET_KEY"))  # Should print a value, NOT None
+print("TOGETHER_API_KEY:", os.getenv("TOGETHER_API_KEY"))  # Should print a value, NOT None
+print("UPLOAD_FOLDER:", os.getenv("UPLOAD_FOLDER"))  # Should print a value, NOT None
 
 # Flask app setup
 app = Flask(__name__)
-app.secret_key = os.getenv('FLASK_SECRET_KEY', 'super-secret-key')  
-CORS(app)  # Enable frontend-backend communication
+app.secret_key = os.getenv('FLASK_SECRET_KEY', 'super-secret-key')  # Uses .env value
+
+# AI Model Setup
+TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY', '')
+llm = Together(
+    model="meta-llama/Llama-3-8b-chat-hf",
+    together_api_key=TOGETHER_API_KEY,  # Uses .env value
+    temperature=0.7,
+    max_tokens=512
+)
 
 limiter = Limiter(
     get_remote_address,
@@ -26,16 +42,6 @@ limiter = Limiter(
     default_limits=["20 per minute"],
     storage_uri="memory://"
 )
-
-# AI Model (Together API)
-TOGETHER_API_KEY = os.getenv('TOGETHER_API_KEY', '')
-llm = Together(
-    model="meta-llama/Llama-3-8b-chat-hf",
-    together_api_key=TOGETHER_API_KEY,
-    temperature=0.7,
-    max_tokens=512
-)
-
 memory = ConversationBufferMemory()
 conversation = ConversationChain(llm=llm, memory=memory, verbose=True)
 
